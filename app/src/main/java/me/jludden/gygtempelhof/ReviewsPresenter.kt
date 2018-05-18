@@ -1,9 +1,9 @@
 package me.jludden.gygtempelhof
 
-import me.jludden.gygtempelhof.data.ReviewsDataRepository
+import me.jludden.gygtempelhof.data.ReviewsRepository
 
 class ReviewsPresenter(
-        val reviewsRepo: ReviewsDataRepository,
+        val reviewsRepo: ReviewsRepository,
         val reviewsView: ReviewsContract.View)
     : ReviewsContract.Presenter {
 
