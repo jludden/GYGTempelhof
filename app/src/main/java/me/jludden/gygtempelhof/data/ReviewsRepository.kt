@@ -1,13 +1,22 @@
 package me.jludden.gygtempelhof.data
 
-import me.jludden.gygtempelhof.data.ReviewsDataSource.LoadReviewssCallback
+import me.jludden.gygtempelhof.data.ReviewsDataSource.LoadReviewsCallback
+import me.jludden.gygtempelhof.data.model.Review
 
 //todo class ReviewsRepository(val remoteData: ReviewsDataSource, val localData: ReviewsDataSource) : ReviewsDataSource
-class ReviewsRepository() : ReviewsDataSource {
+class ReviewsRepository(val localDataSource: ReviewsDataSource, val remoteDataSource: ReviewsDataSource) : ReviewsDataSource {
 
-    override fun getReviews(callback: LoadReviewssCallback){
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    var cacheIsDirty = false
+    var cachedReviews:  ArrayList<Review> = ArrayList()
 
+    override fun getReviews(callback: LoadReviewsCallback){
+
+        if(!cacheIsDirty && !cachedReviews.isEmpty()) {
+            callback.onReviewsLoaded(cachedReviews)
+            return
+        }
+
+        remoteDataSource.getReviews(callback)
     }
 
     override fun postReview(review: Review) {
@@ -15,7 +24,7 @@ class ReviewsRepository() : ReviewsDataSource {
     }
 
     override fun refreshReviews() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        cacheIsDirty = true
     }
 
 
@@ -23,8 +32,8 @@ class ReviewsRepository() : ReviewsDataSource {
         private var INSTANCE: ReviewsRepository? = null
 
         //return the singleton instance, creating it if necessary
-        @JvmStatic fun getInstance(): ReviewsRepository {
-            return INSTANCE ?: ReviewsRepository().apply { INSTANCE = this }
+        @JvmStatic fun getInstance(localDataSource: ReviewsDataSource, remoteDataSource: ReviewsDataSource): ReviewsRepository {
+            return INSTANCE ?: ReviewsRepository(localDataSource, remoteDataSource).apply { INSTANCE = this }
         }
     }
 

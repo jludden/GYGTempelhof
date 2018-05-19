@@ -1,6 +1,6 @@
 package me.jludden.gygtempelhof
 
-import me.jludden.gygtempelhof.data.Review
+import me.jludden.gygtempelhof.data.model.Review
 
 interface ReviewsContract {
 
@@ -31,8 +31,8 @@ interface ReviewsContract {
 
         fun addNewReview()
 
+        fun reviewAddedResult(requestCode: Int, resultCode: Int)
     }
-
 }
 
 //todo

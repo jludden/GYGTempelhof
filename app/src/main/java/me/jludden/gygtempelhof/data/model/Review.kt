@@ -1,10 +1,15 @@
-package me.jludden.gygtempelhof.data
+package me.jludden.gygtempelhof.data.model
 
-data class Review(
+
+
+
+
+
+data class Review2(
         val id: Int,
         val rating: Float,
         val title: String,
-        val message: String,
+        val message: String?,
         val author: String,
         val foreignLanguage: Boolean,
         val date: String,
