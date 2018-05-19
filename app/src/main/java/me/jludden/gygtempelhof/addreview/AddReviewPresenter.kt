@@ -1,5 +1,6 @@
 package me.jludden.gygtempelhof.addreview
 
+import me.jludden.gygtempelhof.data.ReviewsDataSource
 import me.jludden.gygtempelhof.data.ReviewsRepository
 import me.jludden.gygtempelhof.data.model.Review
 
@@ -22,9 +23,15 @@ class AddReviewPresenter(
 
         if(!review.isValid) addReviewView.showInvalidReviewError()
         else {
-            reviewsRepo.postReview(review)
-            addReviewView.showReviewsList() //go back to reviews list activity
+            reviewsRepo.postReview(review, object : ReviewsDataSource.PostReviewCallback {
+                override fun onReviewPosted() {
+                    addReviewView.showReviewsList() //go back to reviews list activity
+                }
+
+                override fun onReviewPostFailure(message: String?) { //never called by mock Post API
+                    addReviewView.showInvalidReviewError()
+                }
+            })
         }
     }
-
 }

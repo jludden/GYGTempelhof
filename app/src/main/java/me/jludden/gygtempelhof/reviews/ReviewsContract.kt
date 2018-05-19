@@ -35,15 +35,13 @@ interface ReviewsContract {
     }
 }
 
-//todo
 enum class ReviewsFilterType {
 
     ALL_REVIEWS,
 
-    PAST_MONTH,
+    LOW_RATING,
 
-    LOW_RATING
-
+    HIGH_RATING
 
 }
 

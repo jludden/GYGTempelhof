@@ -6,6 +6,7 @@ import me.jludden.gygtempelhof.addreview.AddReviewsActivity
 import me.jludden.gygtempelhof.data.*
 import me.jludden.gygtempelhof.data.ReviewsDataSource
 import me.jludden.gygtempelhof.data.model.Review
+import me.jludden.gygtempelhof.reviews.ReviewsFilterType.*
 
 class ReviewsPresenter(
         val reviewsRepo: ReviewsRepository,
@@ -49,12 +50,20 @@ class ReviewsPresenter(
         }
 
         reviewsRepo.getReviews(object : ReviewsDataSource.LoadReviewsCallback {
-            override fun onReviewsLoaded(tasks: List<Review>) {
+            override fun onReviewsLoaded(reviews: List<Review>) {
                 //todo apply filters? show which filter is active?
+                val reviewsToShow = ArrayList<Review>()
+
+                for(review in reviews){
+                    when(currentFiltering) {
+                        ALL_REVIEWS -> reviewsToShow.add(review)
+                        LOW_RATING -> if(review.rating.toFloat() <= 2) reviewsToShow.add(review)
+                        HIGH_RATING -> if(review.rating.toFloat() >= 4) reviewsToShow.add(review)
+                    }
+                }
+
                 reviewsView.setLoadingIndicator(false)
-
-                reviewsView.showReviews(tasks)
-
+                reviewsView.showReviews(reviewsToShow)
             }
 
             override fun onDataNotAvailable(message: String?) {

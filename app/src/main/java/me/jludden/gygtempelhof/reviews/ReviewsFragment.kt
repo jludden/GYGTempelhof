@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -101,17 +102,27 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
     }
 
     override fun showFilteringPopUpMenu() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        PopupMenu(requireContext(), requireActivity().findViewById(R.id.menu_filter)).apply {
+            menuInflater.inflate(R.menu.menu_filters, menu)
+            setOnMenuItemClickListener { item ->
+                when(item.itemId) {
+                    R.id.high_rating -> presenter.currentFiltering = ReviewsFilterType.HIGH_RATING
+                    R.id.low_rating -> presenter.currentFiltering = ReviewsFilterType.LOW_RATING
+                    else -> presenter.currentFiltering = ReviewsFilterType.ALL_REVIEWS
+                }
+                presenter.loadReviews(false)
+                true
+            }
+        }.show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
-            R.id.menu_refresh -> true.also { presenter.loadReviews(true) } //todo doesn't work yet
+            R.id.menu_filter -> true.also { showFilteringPopUpMenu() }
+            R.id.menu_refresh -> true.also { presenter.loadReviews(true) }
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 
     class ReviewsAdapter(reviews: List<Review>)
         : RecyclerView.Adapter<RecyclerView.ViewHolder>() {

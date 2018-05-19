@@ -2,4 +2,8 @@
     <string name="app_name">GYGTempelhof</string>
     <string name="action_settings">Settings</string>
     <string name="menu_refresh">refresh content</string>
+    <string name="menu_filter_title">Filter</string>
+    <string name="high_rating_menu_item">High Rating (4-5 Stars)</string>
+    <string name="low_rating_menu_item">Low Rating (1-2 Stars)</string>
+    <string name="all_unfiltered_menu_item">All</string>
 </resources>

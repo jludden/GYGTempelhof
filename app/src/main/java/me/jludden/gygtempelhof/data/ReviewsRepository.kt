@@ -19,10 +19,10 @@ class ReviewsRepository(val localDataSource: ReviewsDataSource, val remoteDataSo
         remoteDataSource.getReviews(callback)
     }
 
-    override fun postReview(review: Review) {
+    override fun postReview(review: Review, callback: ReviewsDataSource.PostReviewCallback) {
         //todo add to cache, but is ui up to date?
         cachedReviews.add(review)
-        remoteDataSource.postReview(review)
+        remoteDataSource.postReview(review, callback)
     }
 
     override fun refreshReviews() {

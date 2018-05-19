@@ -11,6 +11,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.OkHttpClient
+import okhttp3.ResponseBody
 import retrofit2.http.*
 
 
@@ -19,17 +20,19 @@ class RemoteDataSource(val reviewsAPI: ReviewsAPI) : ReviewsDataSource {
     override fun getReviews(callback: ReviewsDataSource.LoadReviewsCallback) {
 
         //todo
-        reviewsAPI.getReviewsFromServer(20, 1, 0)
+        reviewsAPI.getAllReviewsFromServer(500)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ result -> callback.onReviewsLoaded(result.data) },
                         { error -> callback.onDataNotAvailable(error.message) })
     }
 
-    override fun postReview(review: Review) {
+    override fun postReview(review: Review, callback: ReviewsDataSource.PostReviewCallback ) {
         Log.e("JLUDDEN", "POSTING REVIEW!!! ${review.title} ${review.rating} ${review.message}")
 
+        //todo
 
+        callback.onReviewPosted()
     }
 
     //unused
@@ -49,8 +52,18 @@ class RemoteDataSource(val reviewsAPI: ReviewsAPI) : ReviewsDataSource {
 interface ReviewsAPI {
     @Headers("User-Agent: GYGTempelhof")
     @GET("reviews.json")
-    fun getReviewsFromServer(@Query("count") count: Int, @Query("page") page: Int,
-                             @Query("rating") rating: Int): Observable<ReviewResponse>
+    fun getReviewsFromServer(): Observable<ReviewResponse> //maxes out at 100 responses
+
+    @Headers("User-Agent: GYGTempelhof")
+    @GET("reviews.json")
+    fun getAllReviewsFromServer(@Query("count") count: Int): Observable<ReviewResponse>
+
+//    fun getAllReviewsFromServer(@Query("count") count: Int, @Query("page") page: Int,
+//                             @Query("rating") rating: Int): Observable<ReviewResponse>
+
+    @Headers("User-Agent: GYGTempelhof")
+    @POST("reviews/new")
+    fun postReviewToServer(@Body review: Review): Observable<ResponseBody>
 
     //&page=0&rating=0&sortBy=date_of_review&direction=DESC
 //        @GET("https://www.getyourguide.com/berlin-l17/tempelhof-2-hour-airport-history-tour-berlin-airlift-more-t23776/reviews.json?count=5&page=0&rating=0&sortBy=date_of_review&direction=DESC")

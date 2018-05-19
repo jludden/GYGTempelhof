@@ -5,11 +5,11 @@ import me.jludden.gygtempelhof.data.model.Review
 
 class LocalDataSource private constructor(context: Context) : ReviewsDataSource {
 
-    override fun getReviews(callback: ReviewsDataSource.LoadReviewsCallback) {
+    override fun postReview(review: Review, callback: ReviewsDataSource.PostReviewCallback) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun postReview(review: Review) {
+    override fun getReviews(callback: ReviewsDataSource.LoadReviewsCallback) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 

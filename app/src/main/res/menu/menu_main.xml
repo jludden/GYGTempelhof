@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="me.jludden.gygtempelhof.reviews.ReviewsActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/menu_filter"
+        android:title="@string/menu_filter_title"
+        android:icon="@drawable/ic_launcher_foreground"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/menu_refresh"
         android:title="@string/menu_refresh"
