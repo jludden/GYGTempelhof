@@ -33,7 +33,6 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         setHasOptionsMenu(true)
         val root = inflater.inflate(R.layout.reviews_fragment, container, false)
-
         with(root) {
             findViewById<RecyclerView>(R.id.reviews_container)
                     .apply {
@@ -50,7 +49,6 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
                                 ContextCompat.getColor(context, R.color.colorPrimaryDark)
                         )
                     }
-
         }
 
         // Set up floating action button
@@ -70,17 +68,17 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
 
     override fun showReviews(reviews: List<Review>) {
         reviewsAdapter.reviewsList = reviews
-        reviews_container.visibility = View.VISIBLE
+//        reviews_container.visibility = View.VISIBLE
 //        no_reviews_message.visibility = View.GONE
         Toast.makeText(context, "${reviews.size} Reviews loaded successfully", Toast.LENGTH_SHORT).show()
     }
 
     //todo possibly need to differentiate failed to load vs no reviews
     override fun showLoadingError() {
-//        no_reviews_message.text = "Failed to load reviews" //todo doesnt show
-//
-//        val v = view
-//        if (v != null) Snackbar.make(v, "Failed to load reviews", Snackbar.LENGTH_LONG)
+        no_reviews_message.apply {
+            visibility = View.VISIBLE
+            text = "No reviews loaded"
+        }
 
         Toast.makeText(context, "Error loading reviews", Toast.LENGTH_SHORT).show()
     }
@@ -127,8 +125,12 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
     }
 
     class ReviewViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(review: Review) = with(itemView){
-            review_message.text = review.author + " - " + review.message
+        fun bind(review: Review) = with(itemView) {
+              review_title.text = review.title
+              review_author.text = review.author
+              review_rating.rating = review.rating.toFloat()
+              review_date.text = review.date
+              review_message.text = review.message
         }
     }
 
