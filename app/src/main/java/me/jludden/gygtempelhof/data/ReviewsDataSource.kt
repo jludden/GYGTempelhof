@@ -19,7 +19,7 @@ interface ReviewsDataSource {
 
     interface PostReviewCallback {
 
-        fun onReviewPosted()
+        fun onReviewPosted(id: Int)
 
         fun onReviewPostFailure(message: String?)
     }

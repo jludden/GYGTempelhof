@@ -8,6 +8,7 @@ Open the project in Android Studio. debug using an emulator or usb device
 Notes
 - Toggle airplane mode to get an error response 
 - Per the project instructions, the app UI "does not need to handle orientation changes." Therefore all activities are set to portrait mode and will not rotate.
+- Per the instructions, the app should "allow users to browse all of the reviews...". I didn't implement an incremental loading feature, so it can stutter a bit on the 400+ reviews.
 
 
 ## Libraries Used

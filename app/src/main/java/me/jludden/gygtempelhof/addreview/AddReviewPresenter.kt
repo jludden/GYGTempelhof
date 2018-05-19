@@ -24,7 +24,7 @@ class AddReviewPresenter(
         if(!review.isValid) addReviewView.showInvalidReviewError()
         else {
             reviewsRepo.postReview(review, object : ReviewsDataSource.PostReviewCallback {
-                override fun onReviewPosted() {
+                override fun onReviewPosted(id: Int) {
                     addReviewView.showReviewsList() //go back to reviews list activity
                 }
 
