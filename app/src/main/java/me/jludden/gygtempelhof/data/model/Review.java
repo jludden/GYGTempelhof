@@ -124,4 +124,8 @@ public class Review {
         this.reviewerCountry = reviewerCountry;
     }
 
+    public boolean isValid() {
+        Float stars = Float.parseFloat(rating);
+        return !title.isEmpty() && !message.isEmpty() && stars > 0 && stars <= 5;
+    }
 }

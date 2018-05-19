@@ -20,7 +20,9 @@ class ReviewsRepository(val localDataSource: ReviewsDataSource, val remoteDataSo
     }
 
     override fun postReview(review: Review) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        //todo add to cache, but is ui up to date?
+        cachedReviews.add(review)
+        remoteDataSource.postReview(review)
     }
 
     override fun refreshReviews() {

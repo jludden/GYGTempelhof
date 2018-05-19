@@ -1,6 +1,8 @@
-package me.jludden.gygtempelhof
+package me.jludden.gygtempelhof.reviews
 
+import android.app.Activity
 import android.util.Log
+import me.jludden.gygtempelhof.addreview.AddReviewsActivity
 import me.jludden.gygtempelhof.data.*
 import me.jludden.gygtempelhof.data.ReviewsDataSource
 import me.jludden.gygtempelhof.data.model.Review
@@ -18,8 +20,6 @@ class ReviewsPresenter(
         reviewsView.presenter = this
     }
 
-
-
     override fun start() {
         loadReviews(false)
     }
@@ -30,12 +30,14 @@ class ReviewsPresenter(
     }
 
     override fun addNewReview() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        reviewsView.showAddReview()
     }
 
-    //review added successfully
     override fun reviewAddedResult(requestCode: Int, resultCode: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (AddReviewsActivity.ADD_REVIEW ==
+                requestCode && Activity.RESULT_OK == resultCode) {
+            reviewsView.showSuccessfullyAddedMessage() //review added successfully
+        }
     }
 
     private fun loadReviewsHelper(forceUpdate: Boolean, showLoadingUI: Boolean = false) {

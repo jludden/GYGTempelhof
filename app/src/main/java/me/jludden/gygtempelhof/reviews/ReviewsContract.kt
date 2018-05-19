@@ -1,4 +1,4 @@
-package me.jludden.gygtempelhof
+package me.jludden.gygtempelhof.reviews
 
 import me.jludden.gygtempelhof.data.model.Review
 

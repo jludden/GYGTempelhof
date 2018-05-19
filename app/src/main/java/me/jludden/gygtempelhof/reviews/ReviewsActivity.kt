@@ -1,12 +1,12 @@
-package me.jludden.gygtempelhof
+package me.jludden.gygtempelhof.reviews
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
-import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.reviews_activity.*
+import me.jludden.gygtempelhof.R
+import me.jludden.gygtempelhof.data.Injection
 
 class ReviewsActivity : AppCompatActivity() {
 
@@ -19,11 +19,6 @@ class ReviewsActivity : AppCompatActivity() {
         setContentView(R.layout.reviews_activity)
         setSupportActionBar(toolbar)
 
-  /*      fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-*/
         val reviewsFragment = supportFragmentManager.findFragmentById(R.id.content_frame)
             as ReviewsFragment? ?: ReviewsFragment.newInstance().also {
              supportFragmentManager.beginTransaction().replace(R.id.content_frame, it).commit()

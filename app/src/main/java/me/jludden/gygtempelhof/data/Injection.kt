@@ -1,4 +1,4 @@
-package me.jludden.gygtempelhof
+package me.jludden.gygtempelhof.data
 
 import android.content.Context
 import me.jludden.gygtempelhof.data.LocalDataSource

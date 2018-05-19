@@ -1,5 +1,6 @@
 package me.jludden.gygtempelhof.data
 
+import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -21,15 +22,14 @@ class RemoteDataSource(val reviewsAPI: ReviewsAPI) : ReviewsDataSource {
         reviewsAPI.getReviewsFromServer(20, 1, 0)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(
-                {result -> callback.onReviewsLoaded(result.data)},
-                {error -> callback.onDataNotAvailable(error.message)}
-        )
-
+                .subscribe({ result -> callback.onReviewsLoaded(result.data) },
+                        { error -> callback.onDataNotAvailable(error.message) })
     }
 
     override fun postReview(review: Review) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Log.e("JLUDDEN", "POSTING REVIEW!!! ${review.title} ${review.rating} ${review.message}")
+
+
     }
 
     //unused

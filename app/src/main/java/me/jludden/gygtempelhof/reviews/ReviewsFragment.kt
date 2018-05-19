@@ -1,5 +1,6 @@
-package me.jludden.gygtempelhof
+package me.jludden.gygtempelhof.reviews
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
@@ -16,6 +17,8 @@ import kotlinx.android.synthetic.main.review_item.view.*
 import me.jludden.gygtempelhof.data.model.Review
 
 import kotlinx.android.synthetic.main.reviews_fragment.*
+import me.jludden.gygtempelhof.R
+import me.jludden.gygtempelhof.addreview.AddReviewsActivity
 
 class ReviewsFragment : Fragment(), ReviewsContract.View {
 
@@ -84,11 +87,17 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
     }
 
     override fun showAddReview() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val intent = Intent(context, AddReviewsActivity::class.java)
+        startActivityForResult(intent, AddReviewsActivity.ADD_REVIEW)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        presenter.reviewAddedResult(requestCode, resultCode)
     }
 
     override fun showSuccessfullyAddedMessage() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(context, "Review successfully posted!", Toast.LENGTH_SHORT).show()
+        //todo - should i make sure it's visible? should be datrepo..
     }
 
     override fun showFilteringPopUpMenu() {
