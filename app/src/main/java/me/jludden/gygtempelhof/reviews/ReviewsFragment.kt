@@ -2,6 +2,7 @@ package me.jludden.gygtempelhof.reviews
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Message
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -72,9 +73,13 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
 
     override fun showReviews(reviews: List<Review>) {
         reviewsAdapter.reviewsList = reviews
-//        reviews_container.visibility = View.VISIBLE
-//        no_reviews_message.visibility = View.GONE
-        Toast.makeText(context, "${reviews.size} Reviews loaded successfully", Toast.LENGTH_SHORT).show()
+        showMessage("${reviews.size} Reviews loaded successfully")
+    }
+
+    private fun showMessage(message: String) {
+        activity?.runOnUiThread({
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        })
     }
 
     //todo possibly need to differentiate failed to load vs no reviews
@@ -84,7 +89,7 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
             text = "No reviews loaded"
         }
 
-        Toast.makeText(context, "Error loading reviews", Toast.LENGTH_SHORT).show()
+        showMessage("Error loading reviews")
     }
 
     override fun showAddReview() {
@@ -97,8 +102,7 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
     }
 
     override fun showSuccessfullyAddedMessage() {
-        Toast.makeText(context, "Review successfully posted!", Toast.LENGTH_SHORT).show()
-        //todo - should i make sure it's visible? should be datrepo..
+        showMessage("Review successfully posted!")
     }
 
     override fun showFilteringPopUpMenu() {

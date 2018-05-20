@@ -12,7 +12,7 @@ interface ReviewsDataSource {
 
     interface LoadReviewsCallback {
 
-        fun onReviewsLoaded(tasks: List<Review>)
+        fun onReviewsLoaded(reviews: List<Review>)
 
         fun onDataNotAvailable(message: String?)
     }

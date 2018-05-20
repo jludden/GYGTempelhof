@@ -3,6 +3,10 @@ package me.jludden.gygtempelhof.addreview
 import me.jludden.gygtempelhof.data.ReviewsDataSource
 import me.jludden.gygtempelhof.data.ReviewsRepository
 import me.jludden.gygtempelhof.data.model.Review
+import java.text.SimpleDateFormat
+import java.util.*
+
+
 
 class AddReviewPresenter(
         private val reviewsRepo: ReviewsRepository,
@@ -19,6 +23,7 @@ class AddReviewPresenter(
         val review = Review()
         review.title = title
         review.message = message
+        review.date = todaysDate()
         review.rating = rating
 
         if(!review.isValid) addReviewView.showInvalidReviewError()
@@ -33,5 +38,12 @@ class AddReviewPresenter(
                 }
             })
         }
+    }
+
+    //create a String with today's date
+    private fun todaysDate() : String {
+        val c = Calendar.getInstance().time
+        val df = SimpleDateFormat("MMM dd, yyyy")
+        return df.format(c)
     }
 }

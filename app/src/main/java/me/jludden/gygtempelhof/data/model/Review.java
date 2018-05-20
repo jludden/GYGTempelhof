@@ -4,7 +4,7 @@ package me.jludden.gygtempelhof.data.model;
 public class Review {
 
 
-    private Integer reviewId;
+    private Integer review_id;
 
     private String rating;
 
@@ -28,12 +28,12 @@ public class Review {
 
     private String reviewerCountry;
 
-    public Integer getReviewId() {
-        return reviewId;
+    public Integer getReview_id() {
+        return review_id;
     }
 
-    public void setReviewId(Integer reviewId) {
-        this.reviewId = reviewId;
+    public void setReview_id(Integer review_id) {
+        this.review_id = review_id;
     }
 
     public String getRating() {
@@ -45,11 +45,11 @@ public class Review {
     }
 
     public String getTitle() {
-        return title;
+        return (title == null) ? "" : title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.title = (title == null) ? "" : title ;
     }
 
     public String getMessage() {

@@ -1,9 +1,8 @@
 package me.jludden.gygtempelhof.data
 
 import android.content.Context
-import me.jludden.gygtempelhof.data.LocalDataSource
-import me.jludden.gygtempelhof.data.RemoteDataSource
-import me.jludden.gygtempelhof.data.ReviewsRepository
+import me.jludden.gygtempelhof.data.local.LocalDataSource
+import me.jludden.gygtempelhof.data.remote.RemoteDataSource
 
 //todo move to separate folders for different build variants
 //todo will need to provide ReviewsDataRepo with the local and remote data repos

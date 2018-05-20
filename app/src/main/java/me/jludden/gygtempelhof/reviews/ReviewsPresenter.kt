@@ -15,8 +15,6 @@ class ReviewsPresenter(
 
     override var currentFiltering = ReviewsFilterType.ALL_REVIEWS
 
-    private var firstLoad = true
-
     init {
         reviewsView.presenter = this
     }
@@ -26,8 +24,7 @@ class ReviewsPresenter(
     }
 
     override fun loadReviews(forceUpdate: Boolean) {
-        loadReviewsHelper(forceUpdate || firstLoad)
-        firstLoad = false
+        loadReviewsHelper(forceUpdate, showLoadingUI = true)
     }
 
     override fun addNewReview() {
@@ -51,9 +48,7 @@ class ReviewsPresenter(
 
         reviewsRepo.getReviews(object : ReviewsDataSource.LoadReviewsCallback {
             override fun onReviewsLoaded(reviews: List<Review>) {
-                //todo apply filters? show which filter is active?
                 val reviewsToShow = ArrayList<Review>()
-
                 for(review in reviews){
                     when(currentFiltering) {
                         ALL_REVIEWS -> reviewsToShow.add(review)
