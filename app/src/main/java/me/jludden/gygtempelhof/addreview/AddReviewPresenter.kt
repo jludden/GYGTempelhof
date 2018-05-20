@@ -23,7 +23,7 @@ class AddReviewPresenter(
         val review = Review()
         review.title = title
         review.message = message
-        review.date = todaysDate()
+        review.date = todayDate()
         review.rating = rating
 
         if(!review.isValid) addReviewView.showInvalidReviewError()
@@ -41,7 +41,7 @@ class AddReviewPresenter(
     }
 
     //create a String with today's date
-    private fun todaysDate() : String {
+    private fun todayDate() : String {
         val c = Calendar.getInstance().time
         val df = SimpleDateFormat("MMM dd, yyyy")
         return df.format(c)

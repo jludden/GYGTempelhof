@@ -1,21 +1,12 @@
 package me.jludden.gygtempelhof.data.remote
 
-import android.util.Log
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import me.jludden.gygtempelhof.data.ReviewsDataSource
 import me.jludden.gygtempelhof.data.model.Review
-import me.jludden.gygtempelhof.data.model.ReviewResponse
-import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
-import okhttp3.logging.HttpLoggingInterceptor
-import okhttp3.OkHttpClient
 import retrofit2.Response
-import retrofit2.http.*
 import java.util.*
-
 
 class RemoteDataSource(val reviewsAPI: ReviewsAPI) : ReviewsDataSource {
 
@@ -30,8 +21,6 @@ class RemoteDataSource(val reviewsAPI: ReviewsAPI) : ReviewsDataSource {
 
     //Mock post a review to the server. The response object has the newly created review's ID
     override fun postReview(review: Review, callback: ReviewsDataSource.PostReviewCallback) {
-        Log.e("JLUDDEN", "POSTING REVIEW!!! ${review.title} ${review.rating} ${review.message}")
-
         //Mock Post Call - it should never fail
         postReviewToServerMock(review)
                 .subscribeOn(Schedulers.io())

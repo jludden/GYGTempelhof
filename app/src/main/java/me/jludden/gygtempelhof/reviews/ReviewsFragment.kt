@@ -2,7 +2,6 @@ package me.jludden.gygtempelhof.reviews
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Message
 import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
@@ -16,9 +15,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.review_item.view.*
-import me.jludden.gygtempelhof.data.model.Review
-
 import kotlinx.android.synthetic.main.reviews_fragment.*
+import me.jludden.gygtempelhof.data.model.Review
 import me.jludden.gygtempelhof.R
 import me.jludden.gygtempelhof.addreview.AddReviewsActivity
 
@@ -27,8 +25,6 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
     override lateinit var presenter: ReviewsContract.Presenter
 
     private val reviewsAdapter = ReviewsAdapter(ArrayList(0))
-
-    override var isActive: Boolean = true //todo is this used
 
     override fun onResume() {
         super.onResume()
@@ -73,7 +69,7 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
 
     override fun showReviews(reviews: List<Review>) {
         reviewsAdapter.reviewsList = reviews
-        showMessage("${reviews.size} Reviews loaded successfully")
+        showMessage(getString(R.string.n_reviews_loaded_successfully, reviews.size))
     }
 
     private fun showMessage(message: String) {
@@ -82,14 +78,8 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
         })
     }
 
-    //todo possibly need to differentiate failed to load vs no reviews
     override fun showLoadingError() {
-        no_reviews_message.apply {
-            visibility = View.VISIBLE
-            text = "No reviews loaded"
-        }
-
-        showMessage("Error loading reviews")
+        showMessage(getString(R.string.reviews_loaded_error))
     }
 
     override fun showAddReview() {
@@ -102,7 +92,7 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
     }
 
     override fun showSuccessfullyAddedMessage() {
-        showMessage("Review successfully posted!")
+        showMessage(getString(R.string.review_posted_success))
     }
 
     override fun showFilteringPopUpMenu() {
@@ -132,8 +122,8 @@ class ReviewsFragment : Fragment(), ReviewsContract.View {
         : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         var reviewsList: List<Review> = reviews
-            set(tasks) {
-                field = tasks
+            set(reviews) {
+                field = reviews
                 notifyDataSetChanged()
             }
 

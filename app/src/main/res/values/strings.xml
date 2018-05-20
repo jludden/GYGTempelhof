@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">GYGTempelhof</string>
-    <string name="action_settings">Settings</string>
     <string name="menu_refresh">Refresh content</string>
     <string name="menu_filter_title">Filter</string>
-    <string name="high_rating_menu_item">High Rating (4-5 Stars)</string>
-    <string name="low_rating_menu_item">Low Rating (1-2 Stars)</string>
+    <string name="high_rating_menu_item">High Rating (4–5 Stars)</string>
+    <string name="low_rating_menu_item">Low Rating (1–2 Stars)</string>
     <string name="all_unfiltered_menu_item">All</string>
+    <string name="review_posted_success">Review successfully posted!</string>
+    <string name="reviews_loaded_error">Error loading reviews</string>
+    <string name="n_reviews_loaded_successfully">%1$d Reviews loaded successfully</string>
+    <string name="add_review_writing_instructions">What did you think?</string>
+    <string name="submit_review">Submit Review</string>
+    <string name="title">Title</string>
 </resources>

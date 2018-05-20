@@ -6,8 +6,6 @@ interface ReviewsContract {
 
     interface View : BaseView<Presenter> {
 
-        var isActive: Boolean
-
         fun setLoadingIndicator(active: Boolean)
 
         fun showReviews(reviews: List<Review>)

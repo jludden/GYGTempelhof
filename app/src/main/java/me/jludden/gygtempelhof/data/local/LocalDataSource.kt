@@ -1,13 +1,9 @@
 package me.jludden.gygtempelhof.data.local
 
 import android.content.Context
-import android.os.AsyncTask
-import android.os.Handler
-import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import me.jludden.gygtempelhof.data.ReviewsDataSource
 import me.jludden.gygtempelhof.data.model.Review
-import kotlin.coroutines.experimental.suspendCoroutine
 
 
 class LocalDataSource private constructor(val reviewDao: ReviewDao) : ReviewsDataSource {

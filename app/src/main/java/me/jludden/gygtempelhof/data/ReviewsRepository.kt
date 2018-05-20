@@ -42,8 +42,8 @@ class ReviewsRepository(
         cacheIsDirty = true
     }
 
-    //helper function to populate tasks from the remote data source
-    //we need to also save the tasks to the local db and in-memory cache
+    //helper function to populate reviews from the remote data source
+    //we need to also save the reviews to the local db and in-memory cache
     private fun getReviewsFromRemote(callback: LoadReviewsCallback) {
         remoteDataSource.getReviews(object : LoadReviewsCallback{
             override fun onReviewsLoaded(reviews: List<Review>) {
@@ -58,7 +58,7 @@ class ReviewsRepository(
         })
     }
 
-    //helper function to populate tasks from the local db
+    //helper function to populate reviews from the local db
     //we also need to save to the in-memory db
     private fun getReviewsFromLocal(callback: LoadReviewsCallback) {
         localDataSource.getReviews(object : LoadReviewsCallback{
